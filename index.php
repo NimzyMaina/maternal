@@ -5,4 +5,5 @@ require(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 
-echo  $host = getenv('DB_HOST');
+//echo  $host = getenv('DB_HOST');
+ echo get_domain();
