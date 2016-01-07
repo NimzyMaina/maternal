@@ -1,7 +1,8 @@
 <?php
 
  function get_domain(){
-	return $_SERVER['HTTP_HOST'];
+	//$domain = $_SERVER['HTTP_HOST'];
+	return getenv('SITE_URL');
 }
 
  function parse_extras($rule) 
