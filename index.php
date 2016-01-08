@@ -9,4 +9,7 @@ $dotenv->load();
 $dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD','SITE_URL']);
 
 //echo  $host = getenv('DB_HOST');
- echo get_domain();
+// echo get_domain();
+
+$extras = array('#special_id','.special_class','_blank');
+echo anchor('test.php','New Page','Custom Title Message!',$extras);

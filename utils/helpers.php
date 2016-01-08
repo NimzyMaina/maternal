@@ -2,7 +2,8 @@
 
  function get_domain(){
 	//$domain = $_SERVER['HTTP_HOST'];
-	return getenv('SITE_URL');
+	return $_SERVER['HTTP_HOST'];
+	//return getenv('SITE_URL');
 }
 
  function parse_extras($rule) 
@@ -31,7 +32,7 @@
  function anchor($link, $text, $title, $extras)//1
 {
     $domain = get_domain();
-    $link = $domain . $link;
+    $link = $link;
     $data = '<a href="' . $link . '"';
      
     if ($title)
@@ -60,6 +61,8 @@
      
     $data .= $text;
     $data .= "</a>";
+
+    echo $data;exit;
      
     return $data;
 }
