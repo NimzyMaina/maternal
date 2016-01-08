@@ -62,7 +62,7 @@
     $data .= $text;
     $data .= "</a>";
 
-    echo $data;exit;
+    //echo $data;exit;
      
     return $data;
 }

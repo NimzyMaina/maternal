@@ -11,5 +11,5 @@ $dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD','SITE_
 //echo  $host = getenv('DB_HOST');
 // echo get_domain();
 
-$extras = array('#special_id','.special_class','_blank');
+$extras = array('#special_id','.special_class');
 echo anchor('test.php','New Page','Custom Title Message!',$extras);
