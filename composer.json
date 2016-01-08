@@ -1,5 +1,16 @@
 {
+    "name": "maternal/healthcare",
+    "description": "Maternal Health Care System",
+    "authors": [
+        {
+            "name": "Nimrod Maina",
+            "email": "nimzy.maina@gmail.com"
+        }
+    ],
     "require": {
         "vlucas/phpdotenv": "^2.2"
+    },
+    "autoload": {
+        "files": ["utils/helpers.php"]
     }
 }
