@@ -21,7 +21,8 @@ if(isset($_POST["submit"]))(
 $query=mysql_query("SELECT* FROM login where username='".$user."' AND password='".$pass."')
 	$numrows=mysql_num_rows($query);
 	if ($numrows==0) 
-		$sql="INSERT INTO login (username,password) VALUES ('$user', '$pass')";
+	{
+        $sql="INSERT INTO login (username,password) VALUES ('$user', '$pass')";
 	$result=mysql_query($sql);
 	if($result){
 		echo "account successfully created";
