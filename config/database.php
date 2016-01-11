@@ -1,5 +1,5 @@
 <?php
-require(dirname(__FILE__).'/../vendor/autoload.php');//autoload packages
+require_once(dirname(__FILE__).'/../vendor/autoload.php');//autoload packages
 
 class Database{
  
@@ -28,5 +28,5 @@ class Database{
     }
 }
 
-// $db = new Database();
-// $db->getConnection();
+$database = new Database();
+$db = $database->getConnection();
