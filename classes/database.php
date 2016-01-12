@@ -3,7 +3,11 @@ require_once(dirname(__FILE__).'/../vendor/autoload.php');//autoload packages
 
 class Database{
  
-    public $conn;
+    public $conn; 
+
+    public function __construct(){
+        $this->conn = $this->getConnection();
+    }
  
     // get the database connection
     public function getConnection(){
@@ -23,10 +27,5 @@ class Database{
         }catch(PDOException $exception){
             echo "Connection error: " . $exception->getMessage();
         }
- 
-        return $this->conn;
     }
 }
-
-$database = new Database();
-$db = $database->getConnection();
