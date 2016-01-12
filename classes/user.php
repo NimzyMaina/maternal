@@ -59,12 +59,4 @@ class User {
 	    }
  
     }
-
-    public function chk_lgn(){
-    	if(isset($_SESSION['logged_in'])){
-    		header ("Location:member.php");
-    	}else{
-    		header ("Location:login.php");
-    	}
-    }
 }
