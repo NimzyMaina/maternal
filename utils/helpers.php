@@ -67,7 +67,7 @@
     return $data;
 }
 
-    public function chk_lgn(){
+     function chk_lgn(){
         if(!isset($_SESSION['logged_in'])){
             header ("Location:login.php");
         }
