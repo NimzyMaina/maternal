@@ -1,0 +1,12 @@
+.jumbotron{
+
+	background-image: url(http://www.mamagidi.com/wp-content/uploads/2014/11/mother-baby.jpg);
+	color: black;
+	background-attachment: fixed;
+	height: auto;
+	width: auto;
+	margin-top:-10px;
+	margin-bottom: -10px;  
+	background-size: cover;
+}
+	

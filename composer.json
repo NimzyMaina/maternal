@@ -3,14 +3,16 @@
     "description": "Maternal Health Care System",
     "authors": [
         {
-            "name": "Nimrod Maina",
-            "email": "nimzy.maina@gmail.com"
+            "name": "Lorine Phoebe",
+            "email": "talonalorine@gmail.com"
         }
     ],
     "require": {
         "vlucas/phpdotenv": "^2.2"
     },
     "autoload": {
-        "files": ["utils/helpers.php"]
+        "files": ["utils/helpers.php"],
+        "classmap":["classes"]
+
     }
 }

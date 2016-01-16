@@ -4,12 +4,18 @@ require(dirname(__FILE__).'/../vendor/autoload.php');//autoload packages
 class Database{
  
     public $conn;
+
+    public function __construct(){
+  $this->conn = $this->getConnection();
+    }
  
     // get the database connection
     public function getConnection(){
 
     	$dotenv = new Dotenv\Dotenv(__DIR__.'/..');
 		$dotenv->load();
+        //requiring configs
+$dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD','SITE_URL']);
 
 		$host = getenv('DB_HOST');
 		$db_name = getenv('DB_DATABASE');
@@ -28,5 +34,4 @@ class Database{
     }
 }
 
-// $db = new Database();
-// $db->getConnection();
+

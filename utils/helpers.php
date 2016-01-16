@@ -66,3 +66,8 @@
      
     return $data;
 }
+public function chk_logn(){
+        if(!isset($_SESSION['logged_in'])){
+            header ("Location:member.php");
+        }
+}
