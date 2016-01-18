@@ -1,12 +1,12 @@
 <?php
-require(dirname(__FILE__).'/../vendor/autoload.php');//autoload packages
+require_once(dirname(__FILE__).'/../vendor/autoload.php');//autoload packages
 
 class Database{
  
-    public $conn;
+    public $conn; 
 
     public function __construct(){
-  $this->conn = $this->getConnection();
+       return $this->conn = $this->getConnection();
     }
  
     // get the database connection
@@ -14,8 +14,8 @@ class Database{
 
     	$dotenv = new Dotenv\Dotenv(__DIR__.'/..');
 		$dotenv->load();
-        //requiring configs
-$dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD','SITE_URL']);
+
+        $dotenv->required(['DB_HOST','DB_DATABASE','DB_USERNAME','DB_PASSWORD','SITE_URL']);
 
 		$host = getenv('DB_HOST');
 		$db_name = getenv('DB_DATABASE');
@@ -29,9 +29,6 @@ $dotenv->required(['DB_HOST', 'DB_DATABASE', 'DB_USERNAME', 'DB_PASSWORD','SITE_
         }catch(PDOException $exception){
             echo "Connection error: " . $exception->getMessage();
         }
- 
         return $this->conn;
     }
 }
-
-

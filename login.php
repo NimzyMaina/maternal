@@ -1,3 +1,24 @@
+<?php
+require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
+
+ // get database connection
+if($_POST){
+	$db = new Database();
+	$user = new User($db->conn);
+
+	 $user->email = $_POST['email'];
+    $user->password = $_POST['password'];
+
+    if($user->login()){
+    	header ("Location: homepage.php");
+    	//echo 'logged in';exit;
+    }else{
+    	//echo 'not logged in';exit;
+    	$state = false;
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html >
   <head>
@@ -179,9 +200,19 @@ body{
 		<br>
 		<div class="login">
 		<form id="loginForm" method="post" action="login.php">
+
+		<?php 
+		if(isset($state)){
+			if($state == false){
+		echo '<div class="alert alert-danger">
+		<strong>login not successful</strong>
+		</div>';
+		}
+		}
+		?>
 			<div class="form-group row">
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" name="email" placeholder="email" />
+                    <input type="text" class="form-control" value="<?= value('email')?>" name="email" placeholder="email" />
                 </div>
             </div>
 
@@ -190,9 +221,19 @@ body{
                     <input type="password" class="form-control" name="password" placeholder="password" />
                 </div>
             </div>
-				<input type="button" id="submit" value="Login">
+				<input type="button" id="submit_btn" onclick="myFunction()" value="Login">
 		</form>
 		</div>
+
+<script>
+	// $( "#submit" ).click(function() {
+	//   $( "#loginForm" ).submit();
+	// });
+
+	function myFunction() {
+    document.getElementById("loginForm").submit();
+}
+</script>
 
     
     <script type="text/javascript">
@@ -236,11 +277,7 @@ body{
     });
 </script>
  
-<script>
-	$( "#submit" ).click(function() {
-	  $( "#loginForm" ).submit();
-	});
-</script>
+
     
   </body>
 </html>

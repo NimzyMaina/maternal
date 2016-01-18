@@ -3,8 +3,8 @@
     "description": "Maternal Health Care System",
     "authors": [
         {
-            "name": "Lorine Phoebe",
-            "email": "talonalorine@gmail.com"
+            "name": "Nimrod Maina",
+            "email": "nimzy.maina@gmail.com"
         }
     ],
     "require": {
@@ -12,7 +12,6 @@
     },
     "autoload": {
         "files": ["utils/helpers.php"],
-        "classmap":["classes"]
-
+        "classmap": ["classes"]
     }
 }
