@@ -140,3 +140,6 @@
     function value($name){
          return isset($_POST[$name]) ? $_POST[$name] : '';
      }
+function message($class,$msg){
+    return '<div class="alert alert-'.$class.'" role="alert">'.$msg . '</div>';
+}

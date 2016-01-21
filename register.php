@@ -38,6 +38,7 @@ else{
 	echo "that username already exists";
 }
 }
+}
 ?>
 </body>
 </html>

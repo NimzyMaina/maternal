@@ -6,11 +6,15 @@ if($_POST){
 	$db = new Database();
 	$user = new User($db->conn);
 
+     $user->first_name=$_POST['first_name'];
+     $user->last_name=$_POST['last_name'];
 	 $user->email = $_POST['email'];
-    $user->password = $_POST['password'];
+	 $user->phone=$_POST['phone'];
+     $user->password = $_POST['password'];
+     $user->confirm=$_POST['confirm'];
 
-    if($user->login()){
-    	header ("Location: homepage.php");
+    if($user->register()){
+    	$state=true;
     	//echo 'logged in';exit;
     }else{
     	//echo 'not logged in';exit;
@@ -198,33 +202,51 @@ body{
 			<div>Maternal</div>
 		</div>
 		<br>
-		<div class="login">
-		<form id="loginForm" method="post" action="login.php">
+		<div class="register">
+		<form id="registerForm" method="post" action="register2.php">
 
 		<?php 
 		if(isset($state)){
-			if($state == false){
-		echo '<div class="alert alert-danger">
-		<strong>login not successful</strong>
-		</div>';
+			if($state){
+		echo  message ('success', "user successfully registered");
+		}
+		else{
+			echo message ('danger', "could not register user");
 		}
 		}
 		?>
 			<div class="form-group row">
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" value="<?= value('email')?>" name="email" placeholder="email" />
+                    <input type="text" class="form-control" value="<?= value('first_name')?>" name="first_name" placeholder="first name" />
                 </div>
             </div>
 
             	<div class="form-group row">
                 <div class="col-sm-9">
+                    <input type="text" class="form-control"value="<?= value('last_name')?>" name="last_name" placeholder="last name" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-9">
+                    <input type="text" class="form-control"value="<?= value('email')?>" name="email" placeholder="email" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-9">
+                    <input type="text" class="form-control"value="<?= value('phone')?>" name="phone" placeholder="phone" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-9">
                     <input type="password" class="form-control" name="password" placeholder="password" />
                 </div>
             </div>
-				<input type="button" id="submit_btn" onclick="myFunction()" value="Login">
-				<div class="btn">
-				<a href="register.php"> register</a>
-				</div>
+            <div class="form-group row">
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" name="confirm" placeholder="confirm password" />
+                </div>
+            </div>
+				<input type="button" id="submit_btn" onclick="myFunction()" value="register">
 		</form>
 		</div>
 
@@ -234,7 +256,7 @@ body{
 	// });
 
 	function myFunction() {
-    document.getElementById("loginForm").submit();
+    document.getElementById("registerForm").submit();
 }
 </script>
 
@@ -249,6 +271,27 @@ body{
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
+            	first_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The First Name is required'
+                        }
+                    }
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The Last Name is required'
+                        }
+                    }
+                },
+                phone: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The Phone is required'
+                        }
+                    }
+                },
                 email: {
                     validators: {
                         notEmpty: {
@@ -274,6 +317,17 @@ body{
                             message: 'The password must be more than 6 and less than 12 characters long'
                         }
                     }
+                },
+                confirm:{
+                	validators:{
+                		notEmpty:{
+                			message:'The confirm password is required'
+                		},
+                      identical:{
+                      	field:'password',
+                      	message:'the passwords must be identical'
+                      }
+                	}
                 }
             }
         });
