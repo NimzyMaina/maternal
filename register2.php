@@ -55,7 +55,7 @@ body{
 	bottom: -20px;
 	width: auto;
 	height: auto;
-	background-image: url(http://www.mamagidi.com/wp-content/uploads/2014/11/mother-baby.jpg);
+	background-image: url(http://localhost/maternal/images/mother-baby.jpg);
 	background-size: cover;
 	-webkit-filter: blur(0px);
 	z-index: 0;
@@ -130,7 +130,7 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]{
+.login input[type=submit]{
 	width: 260px;
 	height: 35px;
 	background: #fff;
@@ -145,11 +145,11 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]:hover{
+.login input[type=submit]:hover{
 	opacity: 0.8;
 }
 
-.login input[type=button]:active{
+.login input[type=submit]:active{
 	opacity: 0.6;
 }
 
@@ -163,7 +163,7 @@ body{
 	border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login input[type=button]:focus{
+.login input[type=submit]:focus{
 	outline: none;
 }
 
@@ -172,11 +172,11 @@ body{
 }
 
 ::-webkit-input-placeholder{
-   color: rgba(255,255,255,0.6);
+   color: rgba(255,255,255);
 }
 
 ::-moz-input-placeholder{
-   color: rgba(255,255,255,0.6);
+   color: rgba(255,255,255);
 }
     </style>
 
@@ -202,7 +202,7 @@ body{
 			<div>Maternal</div>
 		</div>
 		<br>
-		<div class="register">
+		<div class="login">
 		<form id="registerForm" method="post" action="register2.php">
 
 		<?php 
@@ -246,7 +246,13 @@ body{
                     <input type="password" class="form-control" name="confirm" placeholder="confirm password" />
                 </div>
             </div>
-				<input type="button" id="submit_btn" onclick="myFunction()" value="register">
+
+                        <div class="form-group row">
+                <div class="col-sm-9">
+                    <input type="submit" id="submit_btn" value="register">
+                </div>
+            </div>
+				
 		</form>
 		</div>
 
@@ -263,7 +269,7 @@ body{
     
     <script type="text/javascript">
     $(document).ready(function() {
-        $('#loginForm').formValidation({
+        $('#registerForm').formValidation({
             message: 'This value is not valid',
             icon: {
                 valid: 'glyphicon glyphicon-ok',
@@ -293,12 +299,22 @@ body{
                     }
                 },
                 email: {
+                    threshold: 5,
                     validators: {
                         notEmpty: {
                             message: 'The email address is required'
                         },
                         emailAddress: {
                             message: 'The input is not a valid email address'
+                        },
+                        remote: {
+                            message: 'The email is in use',
+                            url: '<?= asset('/ajax.php')?>',
+                            data: {
+                                type: 'email'
+                            },
+                            type: 'POST',
+                            delay: 4000
                         }
                     }
                 },

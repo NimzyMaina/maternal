@@ -59,4 +59,24 @@ class User {
 	    }
  
     }
+     public function check_email ($email){
+        $query = "SELECT * FROM $this->table_name WHERE email = '$email' ";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $num = $stmt->rowCount();
+        if($num > 0){
+            return false;
+        }
+        return true;
+    }
+    public function check_phone ($phone){
+        $query = "SELECT * FROM $this->table_name WHERE phone LIKE '%$phone%' ";
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $num = $stmt->rowCount();
+        if($num > 0){
+            return false;
+        }
+        return true;
+    }
 }

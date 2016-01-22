@@ -126,7 +126,7 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]{
+.login input[type=submit]{
 	width: 260px;
 	height: 35px;
 	background: #fff;
@@ -141,11 +141,11 @@ body{
 	margin-top: 10px;
 }
 
-.login input[type=button]:hover{
+.login input[type=submit]:hover{
 	opacity: 0.8;
 }
 
-.login input[type=button]:active{
+.login input[type=submit]:active{
 	opacity: 0.6;
 }
 
@@ -159,7 +159,7 @@ body{
 	border: 1px solid rgba(255,255,255,0.9);
 }
 
-.login input[type=button]:focus{
+.login input[type=submit]:focus{
 	outline: none;
 }
 
@@ -221,7 +221,7 @@ body{
                     <input type="password" class="form-control" name="password" placeholder="password" />
                 </div>
             </div>
-				<input type="button" id="submit_btn" onclick="myFunction()" value="Login">
+				<input type="submit" id="submit_btn"  value="Login">
 				<div class="btn">
 				<a href="register.php"> register</a>
 				</div>
