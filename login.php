@@ -51,7 +51,7 @@ body{
 	bottom: -20px;
 	width: auto;
 	height: auto;
-	background-image: url(http://www.mamagidi.com/wp-content/uploads/2014/11/mother-baby.jpg);
+	background-image: url(http://localhost/maternal/images/mother-baby.jpg);
 	background-size: cover;
 	-webkit-filter: blur(0px);
 	z-index: 0;

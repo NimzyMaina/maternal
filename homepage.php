@@ -31,18 +31,19 @@
 	</div><!--end container-->
 </nav>
 <!--jumbotron-->
-<hr>
-	<div class=" container text-center">
+
+	
 	<!--<div class="row">-->
-	<div class=" jumbotron">
+	<div class="jumbotron">
+	<div class=" container text-center">
 	<h1>MATERNAL HEALTH CARE MANAGEMENT SYSTEM</h1>
 	<p>maternal health care management system is made for pregnant women. it is a system that's meant to walk with you through your pregnancy period all through to delivery. </p>
 	</div>
 	</div><!--end container-->
 	</div>
-	</hr><!--end jumbotron-->
-	<div class="container">
-	<section>
+	<<!--end jumbotron-->
+	<!-- <div class="container"> -->
+	<!-- <section>
 		<div class="page-header" id="services">
 		<h2>SERVICES. <small>the services we offer are:</small></h2>
 		</div>
@@ -64,8 +65,8 @@
 		</div>
 		</div>
 	
-	</section>
-	<div class="container">
+	</section> -->
+	<!-- <div class="container">
 	<div class="page-header" id="gallery">
 		<h2>GALLERY<small>Check out our gallery</small></h2>
 	</div>
@@ -86,7 +87,7 @@
 			<img src="images/images (3).jpg" alt="image">
 			</div>
 		</div>
-		</div>
+		</div> -->
 
 <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

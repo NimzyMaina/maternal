@@ -18,7 +18,7 @@ class User {
     	$query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    first_name = ?,last_name = ?,email = ? , phone_number = ?, password = ?, role = ?";
+                    first_name = ?,last_name = ?,email = ? , phone_number = ?, password = ?, role = 'standard'";
  
         $stmt = $this->conn->prepare($query);
  
@@ -27,11 +27,15 @@ class User {
         $stmt->bindParam(3, $this->email);
         $stmt->bindParam(4, $this->phone_number);
         $stmt->bindParam(5, sha1($this->password));
-        $stmt->bindParam(6, $this->role);
+        //$stmt->bindParam(6, $this->role);
+
+        //echo $stmt->queryString;exit;
  
         if($stmt->execute()){
+            //echo 'good';exit;
             return true;
         }
+        //echo 'bad';exit;
             return false;
     }
 

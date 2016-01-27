@@ -23,7 +23,7 @@ if($_POST){
 
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<title>Register</title>
@@ -44,4 +44,4 @@ if($_POST){
 	}
 	}?>
 </body>
-</html>
+</html> -->
