@@ -83,4 +83,96 @@ class User {
         }
         return true;
     }
+    
+function readAll(){
+ 
+    $query = "SELECT
+                *
+            FROM
+                " . $this->table_name ;
+ 
+    $stmt = $this->conn->prepare( $query );
+    $stmt->execute();
+ 
+    return $stmt;
 }
+public function countAll(){
+ 
+    $query = "SELECT id FROM " . $this->table_name . "";
+ 
+    $stmt = $this->conn->prepare( $query );
+    $stmt->execute();
+ 
+    $num = $stmt->rowCount();
+ 
+    return $num;
+}
+
+function readOne(){
+ 
+    $query = "SELECT
+                id, first_name, last_name, email, phone, password
+            FROM
+                " . $this->table_name . "
+            WHERE
+                id = ?
+            LIMIT
+                0,1";
+ 
+    $stmt = $this->conn->prepare( $query );
+    $stmt->bindParam(1, $this->id);
+    $stmt->execute();
+ 
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+    $this->name = $row['first_name'];
+    $this->price = $row['last_name'];
+    $this->description = $row['email'];
+    $this->category_id = $row['phone'];
+    $this->category_id = $row['password'];
+}
+
+function update(){
+ 
+    $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                first_name = :first_name,
+                last_name = :last_name,
+                email = :email,
+                phone  = :phone,
+                password  = :password
+            WHERE
+                id = :id";
+ 
+    $stmt = $this->conn->prepare($query);
+ 
+    $stmt->bindParam(':first_name', $this->name);
+    $stmt->bindParam(':last_name', $this->price);
+    $stmt->bindParam(':email', $this->description);
+    $stmt->bindParam(':phone', $this->category_id);
+     $stmt->bindParam(':password', $this->id);
+    $stmt->bindParam(':id', $this->id);
+ 
+    // execute the query
+    if($stmt->execute()){
+        return true;
+    }else{
+        return false;
+    }
+}
+function delete(){
+ 
+    $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+ 
+    $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(1, $this->id);
+ 
+    if($result = $stmt->execute()){
+        return true;
+    }else{
+        return false;
+    }
+}
+}
+?>
