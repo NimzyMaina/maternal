@@ -35,28 +35,91 @@ class User {
             return false;
     }
 
-    public function login(){
-    	$query = "SELECT * FROM $this->table_name WHERE email='".sha1($this->password)."' ";
+    public function login()
+    {
+        $query = "SELECT * FROM $this->table_name WHERE email='" . sha1($this->password) . "' ";
 
-    	$stmt = $this->conn->prepare( $query );
-	    $stmt->execute();
-	 
-	    $num = $stmt->rowCount();
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
 
-	    if($num != 0 && $num < 2){
-	    	 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
- 			extract($row);
+        $num = $stmt->rowCount();
 
- 			if($this->email == $email && sha1($this->password) ==  $password){
- 				session_start();
- 				$_SESSION['full_name'] = $first_name ." ". $last_name;
- 				$_SESSION['logged_in'] = true;
- 				return true;
- 			}
- 				return false;
+        if ($num != 0 && $num < 2) {
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                extract($row);
 
-        }//while
-	    }
- 
+                if ($this->email == $email && sha1($this->password) == $password) {
+                    session_start();
+                    $_SESSION['full_name'] = $first_name . " " . $last_name;
+                    $_SESSION['logged_in'] = true;
+                    return true;
+                }
+                return false;
+
+            }//while
+        }
     }
+
+        function readAll(){
+            $query = "SELECT *
+            FROM
+                $this->table_name";
+
+            $stmt = $this->conn->prepare( $query );
+            $stmt->execute();
+
+            return $stmt;
+        }
+
+        function update($field_name,$value,$id){
+            $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                $field_name = '$value'
+            WHERE
+                id = $id";//exit;
+
+            $stmt = $this->conn->prepare($query);
+
+            // $stmt->bindParam(':value', $value);
+            //$stmt->bindParam(':id', $id);
+
+            // execute the query
+            if($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function countAll(){
+
+            $query = "SELECT id FROM $this->table_name ";
+
+            $stmt = $this->conn->prepare( $query );
+            $stmt->execute();
+
+            $num = $stmt->rowCount();
+
+            return $num;
+        }
+
+        public function delete($id){
+            $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                status = 0
+            WHERE
+                id = $id";//exit;
+
+            $stmt = $this->conn->prepare($query);
+
+            if($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+ 
+
 }
