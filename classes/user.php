@@ -39,7 +39,7 @@ class User {
 
     public function login()
     {
-        $query = "SELECT * FROM $this->table_name WHERE email='" . sha1($this->password) . "' ";
+        $query = "SELECT * FROM $this->table_name WHERE email = '$this->email' AND password = '".sha1($this->password)."' ";
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
