@@ -14,6 +14,8 @@
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <link href="css/formValidation.css" rel="stylesheet">
+
     <link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
 
     <link href="<?=asset('/bower_components/sweetalert2/dist/sweetalert2.css')?>" rel="stylesheet">
@@ -34,6 +36,8 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/dataTables.bootstrap.min.js"></script>
+    <script src="js/formValidation.min.js"></script>
+    <script src="js/framework/bootstrap.js"></script>
 
     <script src="<?=asset('/bower_components/sweetalert2/dist/sweetalert2.min.js')?>"></script>
     <script src="https://cdn.datatables.net/buttons/1.1.1/js/dataTables.buttons.min.js"></script>
@@ -172,3 +176,7 @@
                 </ul>
             </li>
         </ul>
+
+        <?php
+        require 'templates/menu.php';
+        ?>

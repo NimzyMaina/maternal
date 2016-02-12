@@ -94,56 +94,57 @@ $(function(){
     });
 });
 
-$(document).ready(function() {
-    $('#registerForm').formValidation({
-        message: 'This value is not valid',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            first_name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The First Name is required'
-                    }
-                }
+
+ $(document).ready(function() {
+        $('#registerForm').formValidation({
+            message: 'This value is not valid',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
             },
-            last_name: {
-                validators: {
-                    notEmpty: {
-                        message: 'The Last Name is required'
+            fields: {
+                first_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The First Name is required'
+                        }
                     }
-                }
-            },
-            phone: {
-                validators: {
-                    notEmpty: {
-                        message: 'The Phone is required'
+                },
+                last_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The Last Name is required'
+                        }
                     }
-                }
-            },
-            email: {
-                threshold: 5,
-                validators: {
-                    notEmpty: {
-                        message: 'The email address is required'
-                    },
-                    emailAddress: {
-                        message: 'The input is not a valid email address'
-                    },
-                    remote: {
-                        message: 'The email is in use',
-                        url: ajax_url,
-                        data: {
-                            type: 'email'
+                },
+                phone: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The Phone is required'
+                        }
+                    }
+                },
+                email: {
+                    threshold: 5,
+                    validators: {
+                        notEmpty: {
+                            message: 'The email address is required'
                         },
-                        type: 'POST',
-                        delay: 4000
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        },
+                        remote: {
+                            message: 'The email is in use',
+                            url: ajax_url,
+                            data: {
+                                type: 'email'
+                            },
+                            type: 'POST',
+                            delay: 4000
+                        }
                     }
                 }
             }
-        }
+        });
     });
-});

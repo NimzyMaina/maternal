@@ -24,6 +24,23 @@ switch($_POST['type']){
             $isAvailable = true;
         }
         break;
+
+    case 'delete_user':
+        if($user->delete($_POST['object_id'])){
+            $isAvailable = true;
+        }
+        break;
+
+    case 'toog_user';
+        if($_POST['status'] == 1){
+            $status = 0;
+        }else{
+            $status = 1;
+        }
+        if($user->toogle($_POST['object_id'],$status)){
+            $isAvailable = true;
+        }
+        break;
 }
 
 echo json_encode(array(

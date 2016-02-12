@@ -6,7 +6,6 @@ $stmt = $user->readAll();
 $num = $stmt->rowCount();
 
 require 'templates/header.php';
-require 'templates/menu.php';
 ?>
 
 <div id="page-wrapper">
@@ -34,7 +33,7 @@ require 'templates/menu.php';
 
 <?php
 if($num>0){
-    echo "<div class='col-md-12'><table id='example' class='table table-hover table-responsive table-bordered display nowrap'>";
+    echo "<div class='col-md-12'><table id='example1' class='table table-hover table-responsive table-bordered display nowrap'>";
     echo "<thead><tr>";
     echo "<th>First Name</th>";
     echo "<th>Last Name</th>";
@@ -65,9 +64,9 @@ if($num>0){
         echo "<td id='phone:$id' contenteditable=\"true\">{$phone}</td>";
         echo "<td>{$role}</td>";
         if($status == 1){
-            $temp = '<span class="toog label label-success" data-status="'.$status.'" data-id="'.$id.'" data-type="toog_item">Active</span>';
+            $temp = '<span class="toog label label-success" data-status="'.$status.'" data-id="'.$id.'" data-type="toog_user">Active</span>';
         }else{
-            $temp = '<span class="toog label label-danger" data-status="'.$status.'" data-id="'.$id.'" data-type="toog_item">Inactive</span>';
+            $temp = '<span class="toog label label-danger" data-status="'.$status.'" data-id="'.$id.'" data-type="toog_user">Inactive</span>';
         }
         echo '<td>'.$temp.'</td>';
         echo "<td>";
