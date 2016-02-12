@@ -9,6 +9,7 @@ class User {
     public $last_name;
     public $phone;
     public $role;
+    public $status;
 
     public function __construct($db){
         $this->conn = $db;
@@ -18,7 +19,7 @@ class User {
     	$query = "INSERT INTO
                     " . $this->table_name . "
                 SET
-                    first_name = ?,last_name = ?,email = ? , phone = ?, password = ?, role = ?";
+                    first_name = ?,last_name = ?,email = ? , phone = ?, password = ?, role = ?,status = ?";
  
         $stmt = $this->conn->prepare($query);
  
@@ -28,6 +29,7 @@ class User {
         $stmt->bindParam(4, $this->phone);
         $stmt->bindParam(5, sha1($this->password));
         $stmt->bindParam(6, $this->role);
+        $stmt->bindParam(7, $this->status);
  
         if($stmt->execute()){
             return true;

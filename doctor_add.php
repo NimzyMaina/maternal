@@ -11,13 +11,13 @@ if($_POST){
 	$user->email = $_POST['email'];
 	$user->phone = $_POST['phone'];
 	$user->status = 1;
-	$user->role = 'patient';
+	$user->role = 'doctor';
 	$user->password = '123456';
 
 	if($user->register()){
-		Flash::success('Patient Successfully Added!!');
+		Flash::success('Doctor Successfully Added!!');
 	}else{
-		Flash::error('Patient Cound Not Be Added!!');
+		Flash::error('Doctor Could Not Be Added!!');
 	}
 }
 
@@ -31,15 +31,15 @@ include 'templates/header.php';
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    Add Patients
-                    <small>Add Patients</small>
+                    Add doctor
+                    <!-- <small>Add doctor</small> -->
                 </h1>
                 <ol class="breadcrumb">
                     <li>
                         <i class="fa fa-dashboard"></i>  <a href="index.php">Dashboard</a>
                     </li>
                     <li class="active">
-                        <i class="fa fa-users"></i> Add Patients
+                        <i class="fa fa-users"></i> Add Doctor
                     </li>
                 </ol>
             </div>
