@@ -6,17 +6,20 @@ if($_POST){
     $db = new Database();
     $user = new User($db->conn);
 
-    //print_r($_POST);exit;
+   // print_r($_POST);exit;
 
     $user->first_name=$_POST['first_name'];
     $user->last_name=$_POST['last_name'];
     $user->email = $_POST['email'];
-    $user->phone_number=$_POST['phone'];
+    $user->phone=$_POST['phone'];
     $user->password = $_POST['password'];
     //$user->confirm=$_POST['confirm'];
+    $user->role = 'patient';
+    $user->status = true;
 
     if($user->register()){
         $state=true;
+        unset($_POST);
         //echo 'logged in';exit;
     }else{
         //echo 'not logged in';exit;
@@ -178,7 +181,7 @@ if($_POST){
         }
 
         ::-moz-input-placeholder{
-            color: rgba(255,255,255);
+            color: rgba(255,255,255,255);
         }
     </style>
 

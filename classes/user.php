@@ -65,13 +65,26 @@ class User {
         function readAll(){
             $query = "SELECT *
             FROM
-                $this->table_name";
+                $this->table_name
+                WHERE role = 'patient'";
 
             $stmt = $this->conn->prepare( $query );
             $stmt->execute();
 
             return $stmt;
         }
+
+    function readAllDocs(){
+        $query = "SELECT *
+            FROM
+                $this->table_name
+                WHERE role = 'doctor'";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        return $stmt;
+    }
 
         function update($field_name,$value,$id){
             $query = "UPDATE

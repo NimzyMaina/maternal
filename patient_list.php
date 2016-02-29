@@ -70,8 +70,7 @@ if($num>0){
         }
         echo '<td>'.$temp.'</td>';
         echo "<td>";
-        // edit and delete button is here
-        echo "<a href='update_product.php?id={$id}' class='btn btn-success left-margin'>Edit <i class='glyphicon glyphicon-edit'></i> </a>&nbsp;&nbsp;";
+        // delete button is here
         echo "<a delete-id='{$id}' delete-type='delete_user' class='btn btn-danger delete-object'>Delete <i class='glyphicon glyphicon-floppy-remove'></i> </a>";
         echo "</td>";
 
