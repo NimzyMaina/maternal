@@ -147,3 +147,127 @@ $(document).ready(function() {
         }
     });
 });
+//
+//$('#calendar').fullCalendar();
+
+
+$(document).ready(function() {
+
+    var zone = "Africa/Nairobi";  //Change this to your timezone
+
+    $.ajax({
+        url: 'ajax.php',
+        type: 'POST',
+        data: 'type=fetch',
+        async: false,
+        success: function(response){
+            json_events = response;
+        }
+    });
+
+    var currentMousePos = {
+        x: -1,
+        y: -1
+    };
+    jQuery(document).on("mousemove", function (event) {
+        currentMousePos.x = event.pageX;
+        currentMousePos.y = event.pageY;
+    });
+
+    /* initialize the external events
+     -----------------------------------------------------------------*/
+
+    $('#external-events .fc-event').each(function() {
+
+        // store data so the calendar knows to render an event upon drop
+        $(this).data('event', {
+            title: $.trim($(this).text()), // use the element's text as the event title
+            stick: true // maintain when user navigates (see docs on the renderEvent method)
+        });
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+            zIndex: 999,
+            revert: true,      // will cause the event to go back to its
+            revertDuration: 0  //  original position after the drag
+        });
+
+    });
+
+    $('#calendar').fullCalendar({
+        events: JSON.parse(json_events),
+        utc: true,
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        editable: true,
+        droppable: true,
+        slotDuration: '00:30:00',
+        eventReceive: function(event){
+            var title = event.title;
+            var start = event.start.format("YYYY-MM-DD[T]HH:MM:SS");
+            $.ajax({
+                url: 'ajax.php',
+                data: 'type=new_appointment&title='+title+'&startdate='+start+'&zone='+zone,
+                type: 'POST',
+                dataType: 'json',
+                success: function(response){
+                    event.id = response.eventid;
+                    $('#calendar').fullCalendar('updateEvent',event);
+                },
+                error: function(e){
+                    console.log(e.responseText);
+                }
+            });
+            $('#calendar').fullCalendar('updateEvent',event);
+        },
+        eventClick: function(event, jsEvent, view) {
+            swal({   title: 'Edit Appointment',
+                html: '<div class="form-group">' +
+                '<label>Patient Name</label>' +
+                '<input class="form-control" id="input-field" value="'+event.title+'">' +
+                '</div>',
+                showCancelButton: true,
+                closeOnConfirm: false
+            },
+                function() {
+                   var tit = $('#input-field').val();
+                    event.title = tit;
+                    //alert(tit);
+                    $.ajax({
+                        url: 'ajax.php',
+                        data: 'type=changetitle&title='+tit+'&eventid='+event.id,
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(response){
+                            if(response.status == 'success')
+                                $('#calendar').fullCalendar('updateEvent',event);
+                        },
+                        error: function(e){
+                            alert('Error processing your request: '+e.responseText);
+                        }
+                    });
+                    swal('Appointment Has Been Edited');
+                });
+            //var title = prompt('Event Title:', event.title, { buttons: { Ok: true, Cancel: false} });
+            //if (title){
+            //    event.title = title;
+            //    $.ajax({
+            //        url: 'ajax.php',
+            //        data: 'type=changetitle&title='+title+'&eventid='+event.id,
+            //        type: 'POST',
+            //        dataType: 'json',
+            //        success: function(response){
+            //            if(response.status == 'success')
+            //                $('#calendar').fullCalendar('updateEvent',event);
+            //        },
+            //        error: function(e){
+            //            alert('Error processing your request: '+e.responseText);
+            //        }
+            //    });
+            //}
+        }
+    });
+});

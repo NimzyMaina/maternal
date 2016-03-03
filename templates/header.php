@@ -18,6 +18,8 @@
 
     <link href="css/dataTables.bootstrap.min.css" rel="stylesheet">
 
+    <link href="bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet">
+
     <link href="<?=asset('/bower_components/sweetalert2/dist/sweetalert2.css')?>" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/1.1.1/css/buttons.dataTables.min.css" rel="stylesheet">
 
@@ -31,6 +33,7 @@
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
 
     <script src="js/jquery.dataTables.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -38,6 +41,9 @@
     <script src="js/dataTables.bootstrap.min.js"></script>
     <script src="js/formValidation.min.js"></script>
     <script src="js/framework/bootstrap.js"></script>
+
+    <script src="bower_components/moment/min/moment.min.js"></script>
+    <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 
     <script src="<?=asset('/bower_components/sweetalert2/dist/sweetalert2.min.js')?>"></script>
     <script src="https://cdn.datatables.net/buttons/1.1.1/js/dataTables.buttons.min.js"></script>

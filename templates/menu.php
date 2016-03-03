@@ -29,16 +29,20 @@
             </ul>
         </li>
 
+<!--        <li>-->
+<!--            <a href="javascript:;" data-toggle="collapse" data-target="#appointments"><i class="fa fa-fw fa-calendar"></i> Appointments <i class="fa fa-fw fa-caret-down pull-right"></i></a>-->
+<!--            <ul id="appointments" class="collapse">-->
+<!--                <li>-->
+<!--                    <a href="--><?//=asset('/appointment_list.php')?><!--">List Appointments</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    <a href="--><?//= asset('/appointment_add.php')?><!--">Add Appointment</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </li>-->
+
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#appointments"><i class="fa fa-fw fa-calendar"></i> Appointments <i class="fa fa-fw fa-caret-down pull-right"></i></a>
-            <ul id="appointments" class="collapse">
-                <li>
-                    <a href="<?=asset('/appointment_list.php')?>">List Appointments</a>
-                </li>
-                <li>
-                    <a href="<?= asset('/appointment_add.php')?>">Add Appointment</a>
-                </li>
-            </ul>
+            <a href="appointments.php"><i class="fa fa-fw fa-calendar"></i> Appointments</a>
         </li>
 
 

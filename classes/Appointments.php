@@ -1,0 +1,67 @@
+<?php
+
+class Appointments
+{
+    private $conn;
+    private $table_name = "calendar";
+
+    public $id;
+    public $title;
+    public $startdate;
+
+    public function __construct($db){
+        $this->conn = $db;
+    }
+
+    public function add(){
+        $query = "INSERT INTO
+                    " . $this->table_name . "
+                SET
+                    title = ?,startdate = ?,enddate = ? , allDay = false";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bindParam(1, $this->title);
+        $stmt->bindParam(2, $this->startdate);
+        $stmt->bindParam(3, $this->startdate);
+
+        if($stmt->execute()){
+            return $this->conn->lastInsertId();
+        }
+        return false;
+    }
+
+    public function edit(){
+        $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                title = '$this->title'
+            WHERE
+                id = $this->id";//exit;
+
+        $stmt = $this->conn->prepare($query);
+
+        // $stmt->bindParam(':value', $value);
+        //$stmt->bindParam(':id', $id);
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    function readAll(){
+        $query = "SELECT *
+            FROM
+                $this->table_name";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+}
