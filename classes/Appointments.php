@@ -82,7 +82,7 @@ class Appointments
     }
 
     public function getApp($id){
-        $query = "SELECT *
+        $query = "SELECT max(startdate) as startdate
             FROM
                 $this->table_name WHERE user_id = $id";
 

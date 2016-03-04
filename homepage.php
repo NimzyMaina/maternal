@@ -8,6 +8,10 @@ $appointment = new Appointments($db->conn);
 $unum = $user->countAllPatients();
 $dnum = $user->countAllDocss();
 $anum = $appointment->countAll();
+$apps = '';
+if($_SESSION['role'] ==  'patient') {
+    $apps = $appointment->getApp($_SESSION['user_id']);
+    }
 require 'templates/header.php';
 ?>
 
@@ -33,7 +37,14 @@ require 'templates/header.php';
 
         <?php if($_SESSION['role'] == 'patient'){ ?>
         <div class="row">
-            <>
+
+            <?php  while ($row = $apps->fetch(PDO::FETCH_ASSOC)) {
+                extract($row); ?>
+
+                <h3>Next Appointment</h3>
+                <p><?=date('d M, Y h:i A',strtotime($startdate))?></p>
+
+            <?php } ?>
         </div>
 
         <?php }else{ ?>
