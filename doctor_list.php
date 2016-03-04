@@ -1,4 +1,5 @@
 <?php require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
+chk_lgn();
 $db = new Database();
 $user = new User($db->conn);
 //echo sha1('123456');

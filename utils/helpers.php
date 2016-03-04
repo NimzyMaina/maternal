@@ -84,7 +84,7 @@ function chk_lgn(){
 function chk_adm(){
     chk_lgn();
 
-    if($_SESSION['role'] != "admin"){
+    if($_SESSION['role'] != "admin" || $_SESSION['role'] != "doctor"){
         $url = getenv('SITE_URL')."/login.php";
         header ("Location: $url");
     }

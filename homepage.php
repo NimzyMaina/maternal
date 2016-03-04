@@ -1,4 +1,5 @@
 <?php require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
+chk_lgn();
 require 'templates/header.php';
 ?>
 

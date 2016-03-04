@@ -1,7 +1,7 @@
 <?php require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
 
 use \McKay\Flash;
-
+chk_lgn();
 $db = new Database();
 $user = new User($db->conn);
 

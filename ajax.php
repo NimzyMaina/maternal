@@ -56,7 +56,20 @@ switch($_POST['type']){
     case 'changetitle':
         $appointments->id = $_POST['eventid'];
         $appointments->title = $_POST['title'];
+        $appointments->user_id = $_POST['user_id'];
+        $user->id = $_POST['user_id'];
+        date_default_timezone_set('Africa/Nairobi');
+        $appointments->startdate = date('c',strtotime($_POST['startdate']));
         if( $appointments->edit()) {
+            $data = $user->readOne();
+            while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
+                $e = array();
+                extract($row);
+                $p = $phone;
+                $u = $first_name.' '.$last_name;
+            }
+            $p = explode('0',$p,2);
+            sms("+254".$p[1] ,"Dear $u, Your next appointment will be on ".date('d M, Y h:i A',strtotime($appointments->startdate)));
             echo json_encode(array('status' => 'success'));
         }
         else{
@@ -73,6 +86,7 @@ switch($_POST['type']){
             extract($row);
             $e['id'] = $id;
             $e['title'] = $title;
+            $e['user_id'] = $user_id;
             $e['start'] = $startdate;
             $e['end'] = $enddate;
             $allday = ($allDay == "true") ? true : false;

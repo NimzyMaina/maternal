@@ -1,8 +1,23 @@
 <?php require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
 
 use \McKay\Flash;
-
+chk_adm();
+date_default_timezone_set('Africa/Nairobi');
 $db = new Database();
+$user = new User($db->conn);
+
+$stmt = $user->readAll();
+
+$users = array();
+
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    extract($row);
+    $temp = array('id' => $id,'name' => $first_name.' '.$last_name );
+    array_push($users,$temp);
+}
+//echo '<pre>';
+//$users =  print_r($users);
+//exit();
 include 'templates/header.php';
 ?>
 
@@ -45,4 +60,22 @@ include 'templates/header.php';
 
             </div>
         </div>
+<?php
+
+$drop = "\"<div class='form-group'><label>Patient Name</label><select class='form-control' id='input-field'>";
+$i = 0;
+foreach($users as $id => $name){
+    $drop .= "<option value='".$name['id']."'>".$name['name']."</option>";
+    $i++;
+}
+$drop .= "</select></div>";
+
+$drop .= "<div class='form-group'><label>Date</label><input class='form-control' placeholder='dd-mm-yyyy' type='text' id='date'></div>";
+
+$drop .= "<div class='form-group'><label>Time</label><input class='form-control' placeholder='hh:mm' type='text' id='time'></div>\"";
+
+?>
+<script>
+        var users = <?=$drop?>;
+</script>
 <?php include 'templates/footer.php' ?>

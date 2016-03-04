@@ -10,6 +10,7 @@ class User {
     public $phone;
     public $role;
     public $status;
+    public $id;
 
     public function __construct($db){
         $this->conn = $db;
@@ -32,6 +33,10 @@ class User {
         $stmt->bindParam(7, $this->status);
  
         if($stmt->execute()){
+            $record = new Record($this->conn);
+            $record->patient = $this->conn->lastInsertId();
+            //echo
+            $record->add();//exit;
             return true;
         }
             return false;
@@ -54,6 +59,8 @@ class User {
                     session_start();
                     $_SESSION['full_name'] = $first_name . " " . $last_name;
                     $_SESSION['logged_in'] = true;
+                    $_SESSION['role'] = $role;
+                    $_SESSION['user_id'] = $id;
                     return true;
                 }
                 return false;
@@ -73,6 +80,18 @@ class User {
 
             return $stmt;
         }
+
+    function readOne(){
+        $query = "SELECT *
+            FROM
+                $this->table_name
+                WHERE role = 'patient' AND id = $this->id";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        return $stmt;
+    }
 
     function readAllDocs(){
         $query = "SELECT *

@@ -1,4 +1,5 @@
 <?php require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
+chk_lgn();
 $db = new Database();
 $user = new User($db->conn);
 //echo sha1('123456');
@@ -71,6 +72,7 @@ if($num>0){
         echo '<td>'.$temp.'</td>';
         echo "<td>";
         // delete button is here
+        echo "<a href='".asset('/record.php').'?id='.$id."' class='btn btn-primary'>Records <i class='glyphicon glyphicon-list'></i> </a>&nbsp;";
         echo "<a delete-id='{$id}' delete-type='delete_user' class='btn btn-danger delete-object'>Delete <i class='glyphicon glyphicon-floppy-remove'></i> </a>";
         echo "</td>";
 

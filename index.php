@@ -1,7 +1,9 @@
 <?php
 
+header('Location: http://localhost/maternal/login.php');
 require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
 
+header('Location: ').asset('/login.php');
  // get database connection
     $db = new Database();
 

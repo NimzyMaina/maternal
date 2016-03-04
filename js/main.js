@@ -150,10 +150,14 @@ $(document).ready(function() {
 //
 //$('#calendar').fullCalendar();
 
+$('.datepicker').datepicker({
+    format: 'mm/dd/yyyy'
+})
+
 
 $(document).ready(function() {
 
-    var zone = "Africa/Nairobi";  //Change this to your timezone
+    var zone = "03:00";  //Change this to your timezone
 
     $.ajax({
         url: 'ajax.php',
@@ -225,20 +229,26 @@ $(document).ready(function() {
         },
         eventClick: function(event, jsEvent, view) {
             swal({   title: 'Edit Appointment',
-                html: '<div class="form-group">' +
-                '<label>Patient Name</label>' +
-                '<input class="form-control" id="input-field" value="'+event.title+'">' +
-                '</div>',
+                html: users,
+                //type: 'input',
                 showCancelButton: true,
                 closeOnConfirm: false
             },
-                function() {
-                   var tit = $('#input-field').val();
+                function(inputValue) {
+                   var userid = $('#input-field').val();
+                    var date = $('#date').val();
+                    var time = $('#time').val();
+                    var tit = $('#input-field option:selected').text();
+                    event.user_id = userid;
                     event.title = tit;
-                    //alert(tit);
+                    var temp = date+' '+time+':00';//new Date(date+'T'+time+':00+'+zone);
+                    //event.start = temp;
+
+                   // var start = event.start.format("YYYY-MM-DD[T]HH:MM:SS",date);
+                    alert(temp);
                     $.ajax({
                         url: 'ajax.php',
-                        data: 'type=changetitle&title='+tit+'&eventid='+event.id,
+                        data: 'type=changetitle&title='+tit+'&user_id='+userid+'&startdate='+temp+'&eventid='+event.id,
                         type: 'POST',
                         dataType: 'json',
                         success: function(response){

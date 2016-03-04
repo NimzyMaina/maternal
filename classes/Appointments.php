@@ -7,6 +7,7 @@ class Appointments
 
     public $id;
     public $title;
+    public $user_id;
     public $startdate;
 
     public function __construct($db){
@@ -32,10 +33,14 @@ class Appointments
     }
 
     public function edit(){
+        //echo
         $query = "UPDATE
                 " . $this->table_name . "
             SET
-                title = '$this->title'
+                title = '$this->title',
+                user_id = '$this->user_id',
+                startdate = '$this->startdate',
+                enddate = '$this->startdate'
             WHERE
                 id = $this->id";//exit;
 
