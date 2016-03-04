@@ -69,4 +69,27 @@ class Appointments
         return $stmt;
     }
 
+    public function countAll(){
+
+        $query = "SELECT id FROM $this->table_name";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+
+        return $num;
+    }
+
+    public function getApp($id){
+        $query = "SELECT *
+            FROM
+                $this->table_name WHERE user_id = $id";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        return $stmt;
+    }
+
 }

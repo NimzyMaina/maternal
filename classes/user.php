@@ -126,9 +126,9 @@ class User {
             }
         }
 
-        public function countAll(){
+        public function countAllPatients(){
 
-            $query = "SELECT id FROM $this->table_name ";
+            $query = "SELECT id FROM $this->table_name WHERE role = 'patient'";
 
             $stmt = $this->conn->prepare( $query );
             $stmt->execute();
@@ -137,6 +137,18 @@ class User {
 
             return $num;
         }
+
+    public function countAllDocss(){
+
+        $query = "SELECT id FROM $this->table_name WHERE role = 'doctor'";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+
+        return $num;
+    }
 
         public function delete($id){
             $query = "UPDATE
