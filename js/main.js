@@ -178,6 +178,19 @@ $(document).ready(function() {
         currentMousePos.y = event.pageY;
     });
 
+    function isElemOverDiv() {
+        var trashEl = jQuery('#trash');
+        var ofs = trashEl.offset();
+        var x1 = ofs.left;
+        var x2 = ofs.left + trashEl.outerWidth(true);
+        var y1 = ofs.top;
+        var y2 = ofs.top + trashEl.outerHeight(true);
+        if (currentMousePos.x >= x1 && currentMousePos.x <= x2 &&currentMousePos.y >= y1 && currentMousePos.y <= y2) {
+            return true;
+        }
+        return false;
+    }
+
     /* initialize the external events
      -----------------------------------------------------------------*/
 
@@ -245,7 +258,7 @@ $(document).ready(function() {
                     //event.start = temp;
 
                    // var start = event.start.format("YYYY-MM-DD[T]HH:MM:SS",date);
-                    alert(temp);
+                    //alert(temp);
                     $.ajax({
                         url: 'ajax.php',
                         data: 'type=changetitle&title='+tit+'&user_id='+userid+'&startdate='+temp+'&eventid='+event.id,
@@ -256,28 +269,52 @@ $(document).ready(function() {
                                 $('#calendar').fullCalendar('updateEvent',event);
                         },
                         error: function(e){
-                            alert('Error processing your request: '+e.responseText);
+                            //alert('Error processing your request: '+e.responseText);
                         }
                     });
                     swal('Appointment Has Been Edited');
                 });
-            //var title = prompt('Event Title:', event.title, { buttons: { Ok: true, Cancel: false} });
-            //if (title){
-            //    event.title = title;
-            //    $.ajax({
-            //        url: 'ajax.php',
-            //        data: 'type=changetitle&title='+title+'&eventid='+event.id,
-            //        type: 'POST',
-            //        dataType: 'json',
-            //        success: function(response){
-            //            if(response.status == 'success')
-            //                $('#calendar').fullCalendar('updateEvent',event);
-            //        },
-            //        error: function(e){
-            //            alert('Error processing your request: '+e.responseText);
-            //        }
-            //    });
-            //}
+        },eventDrop: function(event, delta, revertFunc) {
+            var title = event.title;
+            var id = event.id;
+            var user = event.user_id;
+            var start = event.start.format();
+            var end = (event.end == null) ? start : event.end.format();
+            $.ajax({
+                url: 'ajax.php',
+                data: 'type=resetdate&title='+title+'&start='+start+'&end='+end+'&eventid='+id+'&user_id='+user,
+                type: 'POST',
+                dataType: 'json',
+                success: function(response){
+                    if(response.status != 'success')
+                        revertFunc();
+                },
+                error: function(e){
+                    revertFunc();
+                   // alert('Error processing your request: '+e.responseText);
+                }
+            });
+        },eventDragStop: function (event, jsEvent, ui, view) {
+            if (isElemOverDiv()) {
+                var con = confirm('Are you sure to delete this event permanently?');
+                if(con == true) {
+                    $.ajax({
+                        url: 'ajax.php',
+                        data: 'type=remove&eventid='+event.id+'&user_id='+event.user_id,
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function(response){
+                            if(response.status == 'success')
+                                $('#calendar').fullCalendar('removeEvents');
+                            $('#calendar').fullCalendar('addEventSource', JSON.parse(json_events));
+                        },
+                        error: function(e){
+                            alert('Error processing your request: '+e.responseText);
+                        }
+                    });
+                }
+            }
         }
     });
 });
+

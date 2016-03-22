@@ -92,4 +92,47 @@ class Appointments
         return $stmt;
     }
 
+    public function changedate(){
+        //echo
+        $query = "UPDATE
+                " . $this->table_name . "
+            SET
+                title = '$this->title',
+                startdate = '$this->startdate',
+                enddate = '$this->startdate'
+            WHERE
+                id = $this->id";//exit;
+
+        $stmt = $this->conn->prepare($query);
+
+        // $stmt->bindParam(':value', $value);
+        //$stmt->bindParam(':id', $id);
+
+        // execute the query
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public function remove(){
+        $query = "DELETE from
+                " . $this->table_name . "
+            WHERE
+                id = $this->id";
+
+        $stmt = $this->conn->prepare($query);
+
+        if($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+
+
+
+    }
+
 }

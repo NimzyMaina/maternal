@@ -1,7 +1,7 @@
 <?php require_once(dirname(__FILE__).'./vendor/autoload.php');//autoload packages
 
 use \McKay\Flash;
-chk_adm();
+chk_lgn();
 date_default_timezone_set('Africa/Nairobi');
 $db = new Database();
 $user = new User($db->conn);
@@ -70,7 +70,7 @@ foreach($users as $id => $name){
 }
 $drop .= "</select></div>";
 
-$drop .= "<div class='form-group'><label>Date</label><input class='form-control' placeholder='dd-mm-yyyy' type='text' id='date'></div>";
+$drop .= "<div class='form-group'><label>Date</label><input class='form-control' placeholder='yyyy-mm-dd' type='text' id='date'></div>";
 
 $drop .= "<div class='form-group'><label>Time</label><input class='form-control' placeholder='hh:mm' type='text' id='time'></div>\"";
 

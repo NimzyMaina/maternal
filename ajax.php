@@ -99,6 +99,57 @@ switch($_POST['type']){
         echo json_encode($app);
         exit();
         break;
+
+    case 'resetdate':
+        $appointments->title = $_POST['title'];
+        $appointments->startdate = $_POST['start'];
+//        $appointments->enddate = $_POST['end'];
+        $appointments->id = $_POST['eventid'];
+        $user->id = $_POST['user_id'];
+
+        if( $appointments->changedate()) {
+            $data = $user->readOne();
+            while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
+                $e = array();
+                extract($row);
+                $p = $phone;
+                $u = $first_name.' '.$last_name;
+            }
+            $p = explode('0',$p,2);
+            sms("+254".$p[1] ,"Dear $u, Your appointment will be changed to ".date('d M, Y h:i A',strtotime($appointments->startdate)));
+            echo json_encode(array('status' => 'success'));
+        }
+        else{
+            echo json_encode(array('status'=>'failed'));
+        }
+        exit;
+
+        break;
+
+    case 'remove':
+        $appointments->id = $_POST['eventid'];
+
+        $user->id = $_POST['user_id'];
+
+        if( $appointments->remove()) {
+            $data = $user->readOne();
+            while ($row = $data->fetch(PDO::FETCH_ASSOC)) {
+                $e = array();
+                extract($row);
+                $p = $phone;
+                $u = $first_name.' '.$last_name;
+            }
+            $p = explode('0',$p,2);
+            sms("+254".$p[1] ,"Dear $u, Your appointment has be Cancelled");
+            echo json_encode(array('status' => 'success'));
+        }
+        else{
+            echo json_encode(array('status'=>'failed'));
+        }
+        exit;
+
+
+        break;
 }
 
 echo json_encode(array(
